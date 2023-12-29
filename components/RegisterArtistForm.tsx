@@ -46,9 +46,7 @@ const RegisterArtistForm = () => {
     try {
       const response = await registerArtist(username, email, password);
 
-      setToken(response);
-
-      router.push("/music");
+      router.push("/login");
     } catch (error) {
       throw new Error("Something went wrong");
     }

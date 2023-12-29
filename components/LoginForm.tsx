@@ -3,7 +3,6 @@ import Link from "next/link";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
 import { login } from "@/services/auth-service";
 import { useRouter } from "next/navigation";
 import { useAuth } from "./AuthProvider";
@@ -53,7 +52,6 @@ const LoginForm = () => {
   };
 
   return (
-    <>
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1>Log in</h1>
       <label className="text-white">Username</label>
@@ -75,7 +73,7 @@ const LoginForm = () => {
         <Link href={"/register"}>Register</Link>
       </div>
     </form>
-    </>
+
   );
 }
 

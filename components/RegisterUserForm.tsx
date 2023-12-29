@@ -46,9 +46,7 @@ const RegisterUserForm = () => {
     try {
       const response = await registerUser(username, email, password);
 
-      setToken(response);
-
-      router.push("/music");
+      router.push("/login");
     } catch (error) {
       throw new Error("Something went wrong");
     }

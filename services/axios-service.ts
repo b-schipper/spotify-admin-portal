@@ -1,8 +1,6 @@
 import { useAuth } from "@/components/AuthProvider";
 import axios, { AxiosInstance } from "axios";
 
-
-
 export const axiosInstance = (): AxiosInstance => {
   const { accessToken, updateToken } = useAuth();
 
@@ -39,7 +37,7 @@ export const axiosInstance = (): AxiosInstance => {
         originalRequest._retry = true;
 
         try {
-          const response = await api.post("/auth/refresh-token");
+          const response = await api.post("/auth/refreshtoken");
 
           if (response.status === 200) {
             const accessToken = response.data.results.access_token;

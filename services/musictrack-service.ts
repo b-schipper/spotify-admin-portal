@@ -25,16 +25,12 @@ export const getRequestedMusicTrack = async (
   }
 }
 
-export const uploadNewMusicTrack = async (
+export const likeMusicTrack = async (
   axios: AxiosInstance,
-  title: string,
-  duration: number,
+  id: number
 ) => {
   try {
-    const response = await axios.post(`/musictracks`, {
-      title,
-      duration,
-    });
+    const response = await axios.post(`/musictracks/${id}/like`)
     return response.data;
   } catch (error: any) {
     console.error(error);
@@ -42,31 +38,11 @@ export const uploadNewMusicTrack = async (
   }
 }
 
-export const editExistingMusicTrack = async (
+export const getMusicTracksLikedByUser = async (
   axios: AxiosInstance,
-  id: number,
-  title: string,
-  duration: number,
 ) => {
   try {
-    const response = await axios.put(`/musictracks`, {
-      id,
-      title,
-      duration,
-    });
-    return response.data;
-  } catch (error: any) {
-    console.error(error);
-    return error.response.data;
-  }
-}
-
-export const deleteExistingMusicTrack = async (
-  axios: AxiosInstance,
-  id: number,
-) => {
-  try {
-    const response = await axios.delete(`/musictrack/${id}`)
+    const response = await axios.post(`/musictracks/liked`)
     return response.data;
   } catch (error: any) {
     console.error(error);

@@ -2,18 +2,30 @@ import axios from "axios";
 
 const API_BASE_URL = 'http://localhost:8090/api/v1';
 
-export const login = async (email: string, password: string) => {
+export const login = async (
+  username: string, 
+  password: string
+) => {
   try {
     const response = await axios.post(
       `${API_BASE_URL}/auth/login`,
       {
-        email,
+        username,
         password,
       },
       { withCredentials: true },
     );
 
-    const accessToken = response.data.results.access_token;
+    console.log(response);
+
+    var role = "";
+    response.data.roles.map((r: string) => {
+      if (r === "ROLE_ARTIST") {role = "ROLE_ARTIST";}
+    });
+
+    localStorage.setItem("role", role);
+
+    const accessToken = response.data.token;
 
     return accessToken;
   } catch (error: any) {
@@ -38,7 +50,7 @@ export const registerUser = async (
       { withCredentials: true },
     );
 
-    return response.data.results.access_token;
+    //return response.data.token;
   } catch (error: any) {
     console.error("Register failed:", error);
     throw error;
@@ -61,7 +73,7 @@ export const registerArtist = async (
       { withCredentials: true },
     );
 
-    return response.data.results.access_token;
+    //return response.data.token;
   } catch (error: any) {
     console.error("Register failed:", error);
     throw error;
@@ -71,7 +83,7 @@ export const registerArtist = async (
 export const logout = async () => {
   try {
     const response = await axios.post(
-      `${API_BASE_URL}/api/auth/logout`,
+      `${API_BASE_URL}/auth/logout`,
       {},
       { withCredentials: true },
     );

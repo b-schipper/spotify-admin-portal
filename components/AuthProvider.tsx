@@ -5,6 +5,8 @@ interface AuthContextProps {
   accessToken: string | null;
   setToken: (token: string | null) => void;
   updateToken: (token: string | null) => void;
+  //refreshtoken: string | null;
+  //setRefreshtoken: (token: string | null) => void;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
