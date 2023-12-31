@@ -5,8 +5,9 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { registerUser } from "@/services/auth-service";
+import { registerAdmin } from "@/services/auth-service";
 import { useAuth } from "./AuthProvider";
+import { Separator } from "@radix-ui/react-separator";
 
 const registerSchema = z.object({
   username: z.string({ required_error: "Username is required" }).min(1),
@@ -18,7 +19,7 @@ const registerSchema = z.object({
 
 type registerValidation = z.infer<typeof registerSchema>;
 
-const RegisterUserForm = () => {
+const RegisterAdminForm = () => {
   const router = useRouter();
   const { accessToken, setToken } = useAuth();
 
@@ -44,7 +45,7 @@ const RegisterUserForm = () => {
     password: string,
   ) => {
     try {
-      const response = await registerUser(username, email, password);
+      const response = await registerAdmin(username, email, password);
 
       router.push("/login");
     } catch (error) {
@@ -53,26 +54,29 @@ const RegisterUserForm = () => {
   };
 
   return(
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col"
+          onSubmit={handleSubmit(onSubmit)}>
       <h1>Register</h1>
-      <label className="text-white">Username</label>
+      <Separator className="my-2 bg-transparent" />
+      <label>Username</label>
       <input 
         type="text" 
         {...register("username")}
       />
-      <label className="text-white">Email</label>
+      <label>Email</label>
       <input 
         type="text" 
         {...register("email")}
       />
-      <label className="text-white">Password</label>
+      <label>Password</label>
       <input 
-        type="text" 
+        type="password" 
         {...register("password")}
       />
       <button type="submit">
         Register
       </button>
+      <Separator className="my-4 bg-transparent" />
       <div>
         <span>Already have an account?</span>
         <Link href={"/login"}>Log in</Link>
@@ -81,4 +85,4 @@ const RegisterUserForm = () => {
   );
 }
 
-export default RegisterUserForm;
+export default RegisterAdminForm;

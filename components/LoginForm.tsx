@@ -3,10 +3,11 @@ import Link from "next/link";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login } from "@/services/auth-service";
+import { loginAdmin } from "@/services/auth-service";
 import { useRouter } from "next/navigation";
 import { useAuth } from "./AuthProvider";
 import { useEffect } from "react";
+import { Separator } from "@radix-ui/react-separator";
 
 const loginSchema = z.object({
   username: z.string({ required_error: "Username is required" }).min(1),
@@ -21,7 +22,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (accessToken != null) {
-      router.push("/music");
+      router.push("/portal");
     }
   }, [accessToken, router]);
 
@@ -41,7 +42,7 @@ const LoginForm = () => {
 
   const handleLogin = async (username: string, password: string) => {
     try {
-      const response = await login(username, password);
+      const response = await loginAdmin(username, password);
 
       setToken(response);
 
@@ -52,22 +53,24 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col"
+          onSubmit={handleSubmit(onSubmit)}>
       <h1>Log in</h1>
-      <label className="text-white">Username</label>
+      <Separator className="my-2 bg-transparent" />
+      <label>Username</label>
       <input
         id="username"
         type="text"
         {...register("username")}
       />
-      <label className="text-white">Password</label>
+      <label>Password</label>
       <input 
         id="password"
         type="password" 
         {...register("password")}
       />
-      
       <button type="submit">Log in</button>
+      <Separator className="my-4 bg-transparent" />
       <div>
         <span>Don't have an account yet?</span>
         <Link href={"/register"}>Register</Link>

@@ -1,8 +1,8 @@
-import RegisterUserForm from "@/components/RegisterUserForm";
+import RegisterAdminForm from "@/components/RegisterAdminForm";
 import React from "react";
 
 const RegisterUser = () => {
-  return <RegisterUserForm />;
+  return <RegisterAdminForm />;
 };
 
 export default RegisterUser;
