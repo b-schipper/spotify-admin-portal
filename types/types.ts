@@ -12,3 +12,10 @@ export interface Profile {
   email: string;
   likeBadge: boolean;
 }
+
+export interface Metrics {
+  userAmount: number;
+  artistAmount: number;
+  adminAmount: number;
+  musicAmount: number;
+}

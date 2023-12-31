@@ -5,7 +5,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { registerArtist } from "@/services/auth-service";
+import { registerAdmin } from "@/services/auth-service";
 import { useAuth } from "./AuthProvider";
 import { Separator } from "@radix-ui/react-separator";
 
@@ -19,7 +19,7 @@ const registerSchema = z.object({
 
 type registerValidation = z.infer<typeof registerSchema>;
 
-const RegisterArtistForm = () => {
+const RegisterAdminForm = () => {
   const router = useRouter();
   const { accessToken, setToken } = useAuth();
 
@@ -33,19 +33,19 @@ const RegisterArtistForm = () => {
 
   const onSubmit = async (data: registerValidation) => {
     try {
-      handleRegisterArtist(data.username, data.email, data.password);
+      handleRegisterUser(data.username, data.email, data.password);
     } catch (error) {
       throw new Error("Something went wrong");
     }
   };
 
-  const handleRegisterArtist = async (
+  const handleRegisterUser = async (
     username: string,
     email: string,
     password: string,
   ) => {
     try {
-      const response = await registerArtist(username, email, password);
+      const response = await registerAdmin(username, email, password);
 
       router.push("/login");
     } catch (error) {
@@ -54,9 +54,9 @@ const RegisterArtistForm = () => {
   };
 
   return(
-    <form className="flex flex-col" 
+    <form className="flex flex-col"
           onSubmit={handleSubmit(onSubmit)}>
-      <h1>Register as an Artist</h1>
+      <h1>Register</h1>
       <Separator className="my-2 bg-transparent" />
       <label>Username</label>
       <input 
@@ -70,10 +70,12 @@ const RegisterArtistForm = () => {
       />
       <label>Password</label>
       <input 
-        type="password"
+        type="password" 
         {...register("password")}
       />
-      <button type="submit">Register</button>
+      <button type="submit">
+        Register
+      </button>
       <Separator className="my-4 bg-transparent" />
       <div>
         <span>Already have an account?</span>
@@ -83,4 +85,4 @@ const RegisterArtistForm = () => {
   );
 }
 
-export default RegisterArtistForm;
+export default RegisterAdminForm;

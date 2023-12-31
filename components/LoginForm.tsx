@@ -3,7 +3,7 @@ import Link from "next/link";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { login } from "@/services/auth-service";
+import { loginAdmin } from "@/services/auth-service";
 import { useRouter } from "next/navigation";
 import { useAuth } from "./AuthProvider";
 import { useEffect } from "react";
@@ -22,7 +22,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (accessToken != null) {
-      router.push("/music");
+      router.push("/portal");
     }
   }, [accessToken, router]);
 
@@ -42,11 +42,11 @@ const LoginForm = () => {
 
   const handleLogin = async (username: string, password: string) => {
     try {
-      const response = await login(username, password);
+      const response = await loginAdmin(username, password);
 
       setToken(response);
 
-      router.push("/music");
+      router.push("/portal");
     } catch (error) {
       throw new Error("Something went wrong");
     }

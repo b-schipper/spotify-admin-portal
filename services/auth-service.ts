@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_BASE_URL = 'http://localhost:8090/api/v1';
 
-export const login = async (
+export const loginAdmin = async (
   username: string, 
   password: string
 ) => {
@@ -19,7 +19,7 @@ export const login = async (
     console.log(response);
 
     response.data.roles.map((r: string) => {
-      if (r === "ROLE_ARTIST") {localStorage.setItem("role", "ROLE_ARTIST");}
+      if (r === "ROLE_ADMIN") {localStorage.setItem("role", "ROLE_ADMIN");}
     });
 
     const accessToken = response.data.token;
@@ -31,37 +31,14 @@ export const login = async (
   }
 };
 
-export const registerUser = async (
+export const registerAdmin = async (
   username: string,
   email: string,
   password: string,
 ) => {
   try {
     const response = await axios.post(
-      `${API_BASE_URL}/auth/register`,
-      {
-        username,
-        email,
-        password,
-      },
-      { withCredentials: true },
-    );
-
-    //return response.data.token;
-  } catch (error: any) {
-    console.error("Register failed:", error);
-    throw error;
-  }
-};
-
-export const registerArtist = async (
-  username: string,
-  email: string,
-  password: string,
-) => {
-  try {
-    const response = await axios.post(
-      `${API_BASE_URL}/auth/register/artist`,
+      `${API_BASE_URL}/auth/register/admin`,
       {
         username,
         email,

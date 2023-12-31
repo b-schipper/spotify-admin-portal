@@ -1,10 +1,10 @@
 import { AxiosInstance } from "axios";
 
-export const getUserProfile = async (
-  axios: AxiosInstance,
+export const getApplicationMetrics = async (
+  axios: AxiosInstance
 ) => {
   try {
-    const response = await axios.get(`/user/profile`)
+    const response = await axios.get(`/portal`);
     return response.data;
   } catch (error: any) {
     console.error(error);
