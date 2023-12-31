@@ -5,7 +5,7 @@ const layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="h-screen bg-primary-100">
       <div className="flex flex-row">
-        <div className="flex-grow items-center">{children}</div>
+        <div className="flex-grow">{children}</div>
       </div>
     </div>
   );
