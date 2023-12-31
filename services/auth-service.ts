@@ -18,12 +18,9 @@ export const login = async (
 
     console.log(response);
 
-    var role = "";
     response.data.roles.map((r: string) => {
-      if (r === "ROLE_ARTIST") {role = "ROLE_ARTIST";}
+      if (r === "ROLE_ARTIST") {localStorage.setItem("role", "ROLE_ARTIST");}
     });
-
-    localStorage.setItem("role", role);
 
     const accessToken = response.data.token;
 

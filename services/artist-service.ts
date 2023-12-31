@@ -7,11 +7,23 @@ export const uploadNewMusicTrack = async (
 ) => {
   try {
     console.log("reaches uploadNewMusicTrack");
-    const response = await axios.post(`/musictracks`, {
+    const response = await axios.post(`/artist/music`, {
       title,
       duration,
     });
     console.log(response);
+    return response.data;
+  } catch (error: any) {
+    console.error(error);
+    return error.response.data;
+  }
+}
+
+export const getAllArtistMusicTracks = async (
+  axios: AxiosInstance,
+) => {
+  try {
+    const response = await axios.get(`/artist/music`);
     return response.data;
   } catch (error: any) {
     console.error(error);
@@ -26,7 +38,7 @@ export const editExistingMusicTrack = async (
   duration: number,
 ) => {
   try {
-    const response = await axios.put(`/musictracks`, {
+    const response = await axios.put(`/artist/music`, {
       id,
       title,
       duration,
@@ -43,7 +55,7 @@ export const deleteExistingMusicTrack = async (
   id: number,
 ) => {
   try {
-    const response = await axios.delete(`/musictrack/${id}`)
+    const response = await axios.delete(`/artist/music/${id}`)
     return response.data;
   } catch (error: any) {
     console.error(error);

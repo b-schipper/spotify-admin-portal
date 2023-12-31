@@ -4,7 +4,7 @@ export const getAllExistingMusicTracks = async (
   axios: AxiosInstance
 ) => {
   try {
-    const response = await axios.get(`/musictracks`);
+    const response = await axios.get(`/music`);
     return response.data;
   } catch (error: any) {
     console.error(error);
@@ -17,7 +17,7 @@ export const getRequestedMusicTrack = async (
   id: number
 ) => {
   try {
-    const response = await axios.get(`/musictracks/${id}`);
+    const response = await axios.get(`/music/${id}`);
     return response.data;
   } catch (error: any) {
     console.error(error);
@@ -30,7 +30,7 @@ export const likeMusicTrack = async (
   id: number
 ) => {
   try {
-    const response = await axios.post(`/musictracks/${id}/like`)
+    const response = await axios.post(`/music/${id}/like`)
     return response.data;
   } catch (error: any) {
     console.error(error);
@@ -42,7 +42,7 @@ export const getMusicTracksLikedByUser = async (
   axios: AxiosInstance,
 ) => {
   try {
-    const response = await axios.post(`/musictracks/liked`)
+    const response = await axios.get(`/music/liked`)
     return response.data;
   } catch (error: any) {
     console.error(error);

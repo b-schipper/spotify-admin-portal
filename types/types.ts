@@ -4,4 +4,11 @@ export interface MusicTrack {
   duration: number;
   artistName: string;
   artistId: number;
+  likeStatus: boolean;
+}
+
+export interface Profile {
+  username: string;
+  email: string;
+  likeBadge: boolean;
 }
